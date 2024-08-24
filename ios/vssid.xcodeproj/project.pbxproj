@@ -9,11 +9,24 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* vssidTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* vssidTests.m */; };
 		0C80B921A6F3F58F76C31292 /* libPods-vssid.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-vssid.a */; };
+		0DAA2919950A4DAFA1C3AC0E /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 145A2F516AE442ACB97A9987 /* Roboto-Thin.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2BB60064E1AC422A8AC0B6EB /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F9B61BEB27DE4942BEBCAF92 /* Roboto-ThinItalic.ttf */; };
+		3292FEE43B654189A6A1BA54 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0D9696B7A3D4485B97DCB16 /* Roboto-Light.ttf */; };
+		4F494A405ECF4651AAE9F3D7 /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 737BC5EC0E2F4D13B502C3B1 /* Roboto-MediumItalic.ttf */; };
+		58819CF913C948F692AF2F0A /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4733E805CB474F928A05C681 /* Roboto-Medium.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-vssid-vssidTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-vssid-vssidTests.a */; };
+		7C88610158894F27A137BC3C /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5A11CCCF68D4AE39351BD99 /* Roboto-LightItalic.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		A6038D4527AEAA3FE7477DED /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 141E2AA821267245C9DEB94E /* PrivacyInfo.xcprivacy */; };
+		AB50F3BAD0B54398B68941DF /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F8BCFD57513D412DA200D39C /* Roboto-Regular.ttf */; };
+		BD60F5D284A74CB7B17966F7 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8C7C900C6834C4C9A4B8E27 /* Roboto-Italic.ttf */; };
+		BE834DE1EB884F338AD7A3B1 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC63BCA39EBC465F80BE9D0A /* Roboto-Bold.ttf */; };
+		C26AF21172FD43B288C33BDE /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6F656FD015334C2BBAB90525 /* Roboto-BoldItalic.ttf */; };
+		CDFAC89C60974B0EA4507FA2 /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 19327F43038B4237A8208478 /* Roboto-BlackItalic.ttf */; };
+		DE821512105C4AB2ACA0E574 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47F087F2E03E47D5A113E169 /* Roboto-Black.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,15 +49,28 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = vssid/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = vssid/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = vssid/main.m; sourceTree = "<group>"; };
-	    13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = vssid/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = vssid/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		141E2AA821267245C9DEB94E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = vssid/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		145A2F516AE442ACB97A9987 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Thin.ttf"; path = "../assets/font/Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		19327F43038B4237A8208478 /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-BlackItalic.ttf"; path = "../assets/font/Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-vssid-vssidTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-vssid-vssidTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-vssid.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vssid.debug.xcconfig"; path = "Target Support Files/Pods-vssid/Pods-vssid.debug.xcconfig"; sourceTree = "<group>"; };
+		4733E805CB474F928A05C681 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../assets/font/Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		47F087F2E03E47D5A113E169 /* Roboto-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Black.ttf"; path = "../assets/font/Roboto-Black.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-vssid.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vssid.release.xcconfig"; path = "Target Support Files/Pods-vssid/Pods-vssid.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-vssid-vssidTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vssid-vssidTests.debug.xcconfig"; path = "Target Support Files/Pods-vssid-vssidTests/Pods-vssid-vssidTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-vssid.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-vssid.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F656FD015334C2BBAB90525 /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-BoldItalic.ttf"; path = "../assets/font/Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
+		737BC5EC0E2F4D13B502C3B1 /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-MediumItalic.ttf"; path = "../assets/font/Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = vssid/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-vssid-vssidTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vssid-vssidTests.release.xcconfig"; path = "Target Support Files/Pods-vssid-vssidTests/Pods-vssid-vssidTests.release.xcconfig"; sourceTree = "<group>"; };
+		D0D9696B7A3D4485B97DCB16 /* Roboto-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Light.ttf"; path = "../assets/font/Roboto-Light.ttf"; sourceTree = "<group>"; };
+		D8C7C900C6834C4C9A4B8E27 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Italic.ttf"; path = "../assets/font/Roboto-Italic.ttf"; sourceTree = "<group>"; };
+		E5A11CCCF68D4AE39351BD99 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-LightItalic.ttf"; path = "../assets/font/Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F8BCFD57513D412DA200D39C /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../assets/font/Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		F9B61BEB27DE4942BEBCAF92 /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-ThinItalic.ttf"; path = "../assets/font/Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
+		FC63BCA39EBC465F80BE9D0A /* Roboto-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Bold.ttf"; path = "../assets/font/Roboto-Bold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +120,7 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
+				141E2AA821267245C9DEB94E /* PrivacyInfo.xcprivacy */,
 			);
 			name = vssid;
 			sourceTree = "<group>";
@@ -124,6 +151,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				CD3BD9DBA11145BCAD78BFBC /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -148,6 +176,25 @@
 				89C6BE57DB24E9ADA2F236DE /* Pods-vssid-vssidTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		CD3BD9DBA11145BCAD78BFBC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				47F087F2E03E47D5A113E169 /* Roboto-Black.ttf */,
+				19327F43038B4237A8208478 /* Roboto-BlackItalic.ttf */,
+				FC63BCA39EBC465F80BE9D0A /* Roboto-Bold.ttf */,
+				6F656FD015334C2BBAB90525 /* Roboto-BoldItalic.ttf */,
+				D8C7C900C6834C4C9A4B8E27 /* Roboto-Italic.ttf */,
+				D0D9696B7A3D4485B97DCB16 /* Roboto-Light.ttf */,
+				E5A11CCCF68D4AE39351BD99 /* Roboto-LightItalic.ttf */,
+				4733E805CB474F928A05C681 /* Roboto-Medium.ttf */,
+				737BC5EC0E2F4D13B502C3B1 /* Roboto-MediumItalic.ttf */,
+				F8BCFD57513D412DA200D39C /* Roboto-Regular.ttf */,
+				145A2F516AE442ACB97A9987 /* Roboto-Thin.ttf */,
+				F9B61BEB27DE4942BEBCAF92 /* Roboto-ThinItalic.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,6 +292,19 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				A6038D4527AEAA3FE7477DED /* PrivacyInfo.xcprivacy in Resources */,
+				DE821512105C4AB2ACA0E574 /* Roboto-Black.ttf in Resources */,
+				CDFAC89C60974B0EA4507FA2 /* Roboto-BlackItalic.ttf in Resources */,
+				BE834DE1EB884F338AD7A3B1 /* Roboto-Bold.ttf in Resources */,
+				C26AF21172FD43B288C33BDE /* Roboto-BoldItalic.ttf in Resources */,
+				BD60F5D284A74CB7B17966F7 /* Roboto-Italic.ttf in Resources */,
+				3292FEE43B654189A6A1BA54 /* Roboto-Light.ttf in Resources */,
+				7C88610158894F27A137BC3C /* Roboto-LightItalic.ttf in Resources */,
+				58819CF913C948F692AF2F0A /* Roboto-Medium.ttf in Resources */,
+				4F494A405ECF4651AAE9F3D7 /* Roboto-MediumItalic.ttf in Resources */,
+				AB50F3BAD0B54398B68941DF /* Roboto-Regular.ttf in Resources */,
+				0DAA2919950A4DAFA1C3AC0E /* Roboto-Thin.ttf in Resources */,
+				2BB60064E1AC422A8AC0B6EB /* Roboto-ThinItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,8 +526,10 @@
 			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-vssid.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z8C5Y5593U;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = vssid/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -493,8 +555,10 @@
 			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-vssid.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z8C5Y5593U;
 				INFOPLIST_FILE = vssid/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -517,6 +581,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CC = "";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -544,6 +609,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				CXX = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
@@ -563,6 +629,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD = "";
+				LDPLUSPLUS = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -582,7 +650,13 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				USE_HERMES = true;
 			};
 			name = Debug;
 		};
@@ -590,6 +664,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CC = "";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -617,6 +692,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				CXX = "";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
@@ -629,6 +705,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD = "";
+				LDPLUSPLUS = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -647,7 +725,13 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				USE_HERMES = true;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
