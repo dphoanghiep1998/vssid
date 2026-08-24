@@ -16,12 +16,17 @@ import {AuthContext} from '../context/AuthContext';
 import {UserInfo} from '../data/TYPEOBJECT';
 import {useTranslation} from 'react-i18next';
 import i18next from 'i18next';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const PersonalManageScreen = ({navigation}) => {
   const {userInfo}: {userInfo: UserInfo} = useContext(AuthContext);
   const {t} = useTranslation();
   const styles = StyleSheet.create({
-    textTop: {},
+    textTop: {
+      color: COLORS.n5,
+      fontFamily: 'Roboto-Regular',
+      fontSize: 16,
+    },
     containerBottom: {
       flexDirection: 'row',
       alignItems: 'center',
@@ -36,7 +41,7 @@ const PersonalManageScreen = ({navigation}) => {
     },
     textBottom: {
       color: COLORS.n5,
-      fontSize: 16,
+      fontSize: 18,
       fontFamily: 'Roboto-Regular',
       fontWeight: '400',
       flex: 1,
@@ -44,8 +49,8 @@ const PersonalManageScreen = ({navigation}) => {
       borderBottomWidth: 1,
     },
     imageBottom: {
-      height: 34,
-      width: 34,
+      height: 40,
+      width: 40,
       tintColor: COLORS.primary,
     },
     imageNextBottom: {
@@ -54,47 +59,46 @@ const PersonalManageScreen = ({navigation}) => {
       tintColor: COLORS.n5,
     },
   });
+  const insets = useSafeAreaInsets();
   return (
-    <View style={{flex: 1}}>
-      <SafeAreaView>
-        <LinearGradient
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            height:60,
-            paddingHorizontal: 14,
-          }}
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 1}}
-          colors={[COLORS.gradient1, COLORS.gradient3]}>
-          <TouchableOpacity
-         
-            onPress={() => {
-              navigation.openDrawer();
-            }}>
-            <Image
-              style={{width: 28, height: 28, tintColor: 'white'}}
-              source={images.menu}
-            />
-          </TouchableOpacity>
+    <View style={{flex: 1, backgroundColor: 'white'}}>
+      <LinearGradient
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          height: 60 + insets.top,
+          paddingTop: insets.top,
+          paddingHorizontal: 14,
+        }}
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 1}}
+        colors={[COLORS.gradient1, COLORS.gradient3]}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.openDrawer();
+          }}>
+          <Image
+            style={{width: 28, height: 28, tintColor: 'white'}}
+            source={images.menu}
+          />
+        </TouchableOpacity>
 
-          <Text
-            style={{
-              color: 'white',
-              flex: 1,
-              textAlign: 'center',
-              fontSize: 16,
-            }}>
-            {t('personalInformationUP')}
-          </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Notice')}>
-            <Image
-              style={{width: 30, height: 30, tintColor: 'white'}}
-              source={images.noti}
-            />
-          </TouchableOpacity>
-        </LinearGradient>
-      </SafeAreaView>
+        <Text
+          style={{
+            color: 'white',
+            flex: 1,
+            textAlign: 'center',
+            fontSize: 18,
+          }}>
+          {t('personalInformationUP')}
+        </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Notice')}>
+          <Image
+            style={{width: 30, height: 30, tintColor: 'white'}}
+            source={images.noti}
+          />
+        </TouchableOpacity>
+      </LinearGradient>
       <ScrollView style={{flex: 1}} contentContainerStyle={{paddingBottom: 20}}>
         <ImageBackground
           style={{
@@ -105,11 +109,15 @@ const PersonalManageScreen = ({navigation}) => {
           }}
           source={images.bginfo}>
           <View style={{flexDirection: 'row'}}>
-            <Image style={{height: 60, width: 60,borderRadius:30}} src={userInfo.user_avatar_url} defaultSource={images.avatar}  />
+            <Image
+              style={{height: 70, width: 70, borderRadius: 35}}
+              src={userInfo.user_avatar_url}
+              defaultSource={images.avatar}
+            />
             <View>
               <Text
                 style={{
-                  fontSize: 16,
+                  fontSize: 18,
                   color: COLORS.n6,
                   marginStart: 20,
                   fontFamily: 'Roboto-Regular',
@@ -119,17 +127,17 @@ const PersonalManageScreen = ({navigation}) => {
               </Text>
               <Text
                 style={{
-                  fontSize: 14,
+                  fontSize: 16,
                   color: COLORS.n5,
                   fontFamily: 'Roboto-Regular',
                   marginStart: 20,
                   marginTop: 15,
                 }}>
-                {t('social_insurance_code')}
+                {t('social_insurance_code')}:
               </Text>
               <Text
                 style={{
-                  fontSize: 14,
+                  fontSize: 16,
                   color: COLORS.n5,
                   fontFamily: 'Roboto-Regular',
                   marginStart: 20,
@@ -165,11 +173,7 @@ const PersonalManageScreen = ({navigation}) => {
             <Text style={styles.textTop}>{t('personalIdentification')}</Text>
             <View style={{flex: 1, alignItems: 'flex-end'}}>
               <Text
-                style={{
-                  color: COLORS.n6,
-                  fontFamily: 'Roboto-Regular',
-                  fontSize: 14,
-                }}>
+                style={styles.textTop}>
                 {userInfo.cccd}
               </Text>
             </View>
@@ -197,19 +201,11 @@ const PersonalManageScreen = ({navigation}) => {
             }}
           />
           <View style={{flexDirection: 'row', marginTop: 10}}>
-            <Text style={{width: '40%'}}>{t('address')}</Text>
+            <Text style={[styles.textTop,{width: '40%'}]}>{t('address')}</Text>
             <View style={{flex: 1, alignItems: 'flex-end'}}>
               <Text style={styles.textTop}>{userInfo.dia_chi}</Text>
             </View>
           </View>
-          <View
-            style={{
-              height: 1,
-              width: '100%',
-              backgroundColor: COLORS.n2,
-              marginTop: 10,
-            }}
-          />
         </ImageBackground>
         <TouchableOpacity
           onPress={() => navigation.navigate('CARD-BHYT')}
@@ -222,7 +218,7 @@ const PersonalManageScreen = ({navigation}) => {
           <Image style={styles.imageNextBottom} source={images.next} />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate('TabNav',{initName:null})}
+          onPress={() => navigation.navigate('TabNav', {initName: null})}
           style={styles.containerBottom}>
           <Image style={styles.imageBottom} source={images.quatrinhthamgia} />
           <View style={styles.containerTextBottom}>
@@ -231,9 +227,11 @@ const PersonalManageScreen = ({navigation}) => {
 
           <Image style={styles.imageNextBottom} source={images.next} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.containerBottom} onPress={() => {
-          navigation.navigate("Entitle")
-        }}>
+        <TouchableOpacity
+          style={styles.containerBottom}
+          onPress={() => {
+            navigation.navigate('Entitle');
+          }}>
           <Image style={styles.imageBottom} source={images.info} />
           <View style={styles.containerTextBottom}>
             <Text style={styles.textBottom}>{t('entitlementInfor')}</Text>
@@ -241,7 +239,9 @@ const PersonalManageScreen = ({navigation}) => {
 
           <Image style={styles.imageNextBottom} source={images.next} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("TabNav",{initName:"bhyt"})} style={styles.containerBottom}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('TabNav', {initName: 'bhyt'})}
+          style={styles.containerBottom}>
           <Image style={styles.imageBottom} source={images.sokhamchuabenh} />
           <View style={styles.containerTextBottom}>
             <Text style={styles.textBottom}>{t('health_care_book')}</Text>

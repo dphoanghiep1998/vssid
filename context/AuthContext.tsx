@@ -1,7 +1,7 @@
 import {View, Text} from 'react-native';
 import React, {createContext, useEffect, useState} from 'react';
 import axios from 'axios';
-import {BASE_URL} from '../constants/config';
+import {BASE_URL, TOKEN} from '../constants/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {FadeFromBottomAndroid} from '@react-navigation/stack/lib/typescript/src/TransitionConfigs/TransitionPresets';
 import {UserInfo} from '../data/TYPEOBJECT';
@@ -30,7 +30,7 @@ export const AuthProvider = ({children}) => {
     setIsLoading(true);
     axios
       .post(`${BASE_URL}/vss/api/signup`, {
-        token: '12345',
+        token: TOKEN,
         data: {
           name: fullName,
           user_avatar: '',
@@ -69,7 +69,7 @@ export const AuthProvider = ({children}) => {
 
     axios
       .post(`${BASE_URL}/vss/api/signin`, {
-        token: '12345',
+        token: TOKEN,
         data: {
           ma_bhxh: insuranceId,
           mat_khau: password,

@@ -15,12 +15,17 @@ import {images} from '../constants/theme';
 import {UserInfo} from '../data/TYPEOBJECT';
 import {AuthContext} from '../context/AuthContext';
 import {useTranslation} from 'react-i18next';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const TheBhytScreen = ({navigation}) => {
   const {userInfo}: {userInfo: UserInfo} = useContext(AuthContext);
   const {t} = useTranslation();
   const styles = StyleSheet.create({
-    textTop: {},
+    textTop: {
+      color: COLORS.n5,
+      fontFamily: 'Roboto-Regular',
+      fontSize: 16,
+    },
     containerBottom: {
       flexDirection: 'row',
       alignItems: 'center',
@@ -53,54 +58,53 @@ const TheBhytScreen = ({navigation}) => {
       tintColor: COLORS.n5,
     },
   });
+  const insets = useSafeAreaInsets();
   return (
-    <View style={{flex: 1}}>
-      <SafeAreaView>
-        <LinearGradient
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 1}}
-          colors={[COLORS.gradient1, COLORS.gradient3]}
+    <View style={{flex: 1, backgroundColor: 'white'}}>
+      <LinearGradient
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 1}}
+        colors={[COLORS.gradient1, COLORS.gradient3]}
+        style={{
+          height: 60 + insets.top,
+          paddingTop: insets.top,
+          flexDirection: 'row',
+          width: '100%',
+          alignItems: 'center', // Center items vertically within LinearGradient
+        }}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
           style={{
-            paddingVertical: 10,
-            height: 60,
-            flexDirection: 'row',
-            width: '100%',
-            alignItems: 'center', // Center items vertically within LinearGradient
+            marginStart: 10,
+            width: 30,
+            height: 30,
+            justifyContent: 'center', // Center image horizontally
+            alignItems: 'center', // Center image vertically
           }}>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
+          <Image
             style={{
-              marginStart: 10,
-              width: 30,
               height: 30,
-              justifyContent: 'center', // Center image horizontally
-              alignItems: 'center', // Center image vertically
+              width: 30,
+              tintColor: COLORS.n1,
+            }}
+            source={images.back}
+          />
+        </TouchableOpacity>
+        <View style={{flex: 1}}>
+          <Text
+            style={{
+              color: COLORS.n1,
+              textAlign: 'center',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginStart: -40,
+              alignSelf: 'center',
+              fontSize: 18,
             }}>
-            <Image
-              style={{
-                height: 30,
-                width: 30,
-                tintColor: COLORS.n1,
-              }}
-              source={images.back}
-            />
-          </TouchableOpacity>
-          <View style={{flex: 1}}>
-            <Text
-              style={{
-                color: COLORS.n1,
-                textAlign: 'center',
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginStart: -34,
-                alignSelf: 'center',
-                fontSize: 16,
-              }}>
-              {t('heath_card')}
-            </Text>
-          </View>
-        </LinearGradient>
-      </SafeAreaView>
+            {t('heath_card_full')}
+          </Text>
+        </View>
+      </LinearGradient>
       <ScrollView style={{flex: 1}} contentContainerStyle={{paddingBottom: 20}}>
         <ImageBackground
           style={{
@@ -112,24 +116,24 @@ const TheBhytScreen = ({navigation}) => {
           source={images.bginfo}>
           <View style={{flexDirection: 'row'}}>
             <Image
-              style={{height: 60, width: 60, borderRadius: 30}}
-              src={userInfo.bhyt_avatar_url}
+              style={{height: 70, width: 70, borderRadius: 35}}
+              src={userInfo.user_avatar_url}
               defaultSource={images.avatar}
             />
-            <View>
+            <View style={{flex:1}}>
               <Text
                 style={{
-                  fontSize: 16,
+                  fontSize: 18,
                   color: COLORS.n6,
                   marginStart: 20,
                   fontFamily: 'Roboto-Regular',
-                  marginTop: 10,
+                  marginTop: 4,
                 }}>
                 {userInfo.name}
               </Text>
               <Text
                 style={{
-                  fontSize: 14,
+                  fontSize: 16,
                   color: COLORS.n5,
                   marginStart: 20,
                   fontFamily: 'Roboto-Regular',
@@ -139,15 +143,16 @@ const TheBhytScreen = ({navigation}) => {
               </Text>
               <Text
                 style={{
-                  fontSize: 14,
+                  fontSize: 16,
                   color: COLORS.n5,
                   fontFamily: 'Roboto-Regular',
                   marginStart: 20,
-                  marginTop: 15,
+                  marginTop: 4,
                 }}>
-                01/{userInfo.bhyt_thoi_han} {t('to')}
+                01/01/{userInfo.bhyt_thoi_han} {t('to_2')} 31/12/
+                {userInfo.bhyt_thoi_han}
               </Text>
-              <Text
+              {/* <Text
                 style={{
                   fontSize: 14,
                   color: COLORS.n5,
@@ -155,8 +160,8 @@ const TheBhytScreen = ({navigation}) => {
                   marginStart: 20,
                   marginTop: 2,
                 }}>
-                12/{userInfo.bhyt_thoi_han}
-              </Text>
+                31/12/{userInfo.bhyt_thoi_han}
+              </Text> */}
             </View>
           </View>
           <View
@@ -202,14 +207,7 @@ const TheBhytScreen = ({navigation}) => {
               {t('health_insurance_card_code')}
             </Text>
             <View style={{flex: 1, alignItems: 'flex-end', width: '40%'}}>
-              <Text
-                style={{
-                  color: COLORS.n6,
-                  fontFamily: 'Roboto-Regular',
-                  fontSize: 14,
-                }}>
-                DN401{userInfo.ma_bhxh}
-              </Text>
+              <Text style={styles.textTop}>DN401{userInfo.ma_bhxh}</Text>
             </View>
           </View>
           <View
@@ -239,19 +237,14 @@ const TheBhytScreen = ({navigation}) => {
             }}
           />
           <View style={{flexDirection: 'row', marginTop: 10}}>
-            <Text style={{width: '40%'}}>{t('valid_Date_of')}</Text>
+            <Text style={[styles.textTop, {width: '40%'}]}>
+              {t('valid_Date_of')}
+            </Text>
             <View style={{flex: 1, alignItems: 'flex-end'}}>
-              <Text style={styles.textTop}>{userInfo.thoi_diem_5_nam}</Text>
+              <Text style={styles.textTop}>01/{userInfo.thoi_diem_5_nam}</Text>
             </View>
           </View>
-          <View
-            style={{
-              height: 1,
-              width: '100%',
-              backgroundColor: COLORS.n2,
-              marginTop: 10,
-            }}
-          />
+         
         </ImageBackground>
         <ImageBackground
           style={{
@@ -281,7 +274,7 @@ const TheBhytScreen = ({navigation}) => {
           </Text>
         </ImageBackground>
       </ScrollView>
-      <View style={{flexDirection: 'row', marginBottom: 10}}>
+      <View style={{flexDirection: 'row', marginBottom: 10,paddingTop:10}}>
         <TouchableOpacity
           style={{
             flex: 1,

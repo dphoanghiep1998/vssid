@@ -20,12 +20,12 @@ export const COLORS = {
 };
 
 export const images = {
-  iconTick:require("../img/icon_tick.png"),
-  tick:require("../img/tick.png"),
-  english:require("../img/flag_english.png"),
-  japan:require("../img/flag_japan.png"),
-  korean:require("../img/flag_korea.png"),
-  china:require("../img/flag_china.png"),
+  iconTick: require('../img/icon_tick.png'),
+  tick: require('../img/tick.png'),
+  english: require('../img/flag_english.png'),
+  japan: require('../img/flag_japan.png'),
+  korean: require('../img/flag_korea.png'),
+  china: require('../img/flag_china.png'),
   anhthe: require('../img/anhthe.png'),
   unlock_2: require('../img/ic_unlock_2.png'),
   checkActive: require('../img/ic_check_active.png'),

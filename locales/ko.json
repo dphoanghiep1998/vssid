@@ -51,6 +51,7 @@
   "personalIdentification": "개인 신분증/여권",
   "address": "주소",
   "heath_card": "건강 보험 카드",
+  "heath_card_full": "건강 보험 카드",
   "social_security": "사회 보장 참여 기록",
   "entitlementInfor": "권리 정보",
   "health_care_book": "건강 관리 책",
@@ -72,7 +73,9 @@
   "detail": "세부 사항",
   "from": "에서...",
   "to": "...에게...",
+  "to_2": "에게",
   "jobTitle": "직위",
+  "jobTitle_2": "직위",
   "employer": "고용주",
   "workAddress": "직장 주소",
   "currency": "통화",
@@ -83,6 +86,8 @@
   "accumulated_time": "기여 누적 시간",
   "year": "년도",
   "month": "월",
+  "years": "년도",
+  "months": "월",
   "participation_record_up": "참가 기록",
   "work_injure": "업무상 상해 - 직업병 보험",
   "health_insurance": "건강 보험",
@@ -115,5 +120,9 @@
   "salary_portion_3": "업무상 재해-직업병 보험 기여금에 대한 급여 부분",
   "salary_portion_4": "건강 보험 기여금에 대한 급여 부분",
   "settingUp": "설정",
-  "faceVerify": "얼굴 인증"
+  "faceVerify": "얼굴 인증",
+  "login_by_pass": "비밀번호로 로그인해 주세요.",
+  "no_internet": "인터넷 없음",
+  "require_internet_connection": "이 페이지는 인터넷 연결이 필요합니다",
+  "reload": "새로고침"
 }

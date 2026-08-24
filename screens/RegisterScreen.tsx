@@ -5,6 +5,8 @@ import {
   Dimensions,
   Easing,
   Image,
+  Keyboard,
+  KeyboardAvoidingView,
   Modal,
   Platform,
   SafeAreaView,
@@ -18,12 +20,14 @@ import {
 } from 'react-native';
 import {FloatingLabelInput} from 'react-native-floating-label-input';
 import LinearGradient from 'react-native-linear-gradient';
-import {BASE_URL} from '../constants/config';
+import {BASE_URL, TOKEN} from '../constants/config';
 import {COLORS, images} from '../constants/theme';
 import data from '../data/data.json';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {District, Province, Ward} from '../data/TYPEOBJECT';
 import {useTranslation} from 'react-i18next';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 const RegisterScreen = ({navigation}) => {
   const [insuranceId, setInsuranceId] = useState('');
   const [fullName, setFullName] = useState('');
@@ -83,7 +87,7 @@ const RegisterScreen = ({navigation}) => {
     setIsLoading(true);
     axios
       .post(`${BASE_URL}/vss/api/signup`, {
-        token: '12345',
+        token: TOKEN,
         data: {
           name: fullName,
           user_avatar: '',
@@ -104,21 +108,21 @@ const RegisterScreen = ({navigation}) => {
         setIsLoading(false);
 
         if (res.data.success) {
+          AsyncStorage.setItem('savedID', insuranceId);
           navigation.navigate('Login');
         } else {
-          if(res.data.error_code == "410"){
-            setTextError(t("account_existed"));
+          if (res.data.error_code == '410') {
+            setTextError(t('account_existed'));
             setShouldShowError(true);
-          }else{
-            setTextError(t("ocurred"));
+          } else {
+            setTextError(t('ocurred'));
             setShouldShowError(true);
           }
-         
         }
       })
       .catch(e => {
         setIsLoading(false);
-        setTextError(t("ocurred"));
+        setTextError(t('ocurred'));
         setShouldShowError(true);
         return false;
       });
@@ -239,17 +243,17 @@ const RegisterScreen = ({navigation}) => {
 
   const validateForm = () => {
     if (insuranceId == '') {
-      setTextError(t("require_social"));
+      setTextError(t('require_social'));
       setShouldShowError(true);
       return false;
     }
     if (fullName == '') {
-      setTextError(t("require_name"));
+      setTextError(t('require_name'));
       setShouldShowError(true);
       return false;
     }
     if (identifyPP == '') {
-      setTextError(t("require_id"));
+      setTextError(t('require_id'));
       setShouldShowError(true);
       return false;
     }
@@ -260,12 +264,12 @@ const RegisterScreen = ({navigation}) => {
       return false;
     }
     if (province == '') {
-      setTextError(t("requireProvince"));
+      setTextError(t('requireProvince'));
       setShouldShowError(true);
       return false;
     }
     if (district == '') {
-      setTextError(t("requireDistrict"));
+      setTextError(t('requireDistrict'));
       setShouldShowError(true);
       return false;
     }
@@ -275,19 +279,19 @@ const RegisterScreen = ({navigation}) => {
       return false;
     }
     if (houseNumber == '') {
-      setTextError(t("requireHouseNumber"));
+      setTextError(t('requireHouseNumber'));
       setShouldShowError(true);
       return false;
     }
 
     if (phoneNumber == '') {
-      setTextError(t("requirePhoneNumber"));
+      setTextError(t('requirePhoneNumber'));
       setShouldShowError(true);
       return false;
     } else {
       if (phoneNumber.length != 10) {
         if (phoneNumber.length != 12) {
-          setTextError(t("requirePhoneNumber"));
+          setTextError(t('requirePhoneNumber'));
           setShouldShowError(true);
           return false;
         }
@@ -295,7 +299,7 @@ const RegisterScreen = ({navigation}) => {
 
       if (phoneNumber.length != 12) {
         if (phoneNumber.length != 10) {
-          setTextError(t("requirePhoneNumber"));
+          setTextError(t('requirePhoneNumber'));
           setShouldShowError(true);
           return false;
         }
@@ -303,14 +307,14 @@ const RegisterScreen = ({navigation}) => {
 
       if (phoneNumber.length == 10) {
         if (!phoneNumber.startsWith('0')) {
-          setTextError(t("requirePhoneNumber"));
+          setTextError(t('requirePhoneNumber'));
           setShouldShowError(true);
           return false;
         }
       }
       if (phoneNumber.length == 12) {
         if (!phoneNumber.startsWith('+84')) {
-          setTextError(t("requirePhoneNumber"));
+          setTextError(t('requirePhoneNumber'));
           setShouldShowError(true);
           return false;
         }
@@ -318,17 +322,17 @@ const RegisterScreen = ({navigation}) => {
     }
     const datePattern = /^(0[1-9]|[12]\d|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
     if (!datePattern.test(dateOfBirth)) {
-      setTextError(t("requireDoB"));
+      setTextError(t('requireDoB'));
       setShouldShowError(true);
       return false;
     }
     const pattern = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).+$/;
     if (password.length < 8 || !pattern.test(password)) {
-      setTextError(t("requirePassword1"));
+      setTextError(t('requirePassword1'));
       setShouldShowError(true);
     }
     if (confirmPassword != password) {
-      setTextError(t("confirmPass"));
+      setTextError(t('confirmPass'));
       setShouldShowError(true);
       return false;
     }
@@ -342,7 +346,7 @@ const RegisterScreen = ({navigation}) => {
     },
     textInput: {
       color: COLORS.n6,
-      fontSize: 11,
+      fontSize: 14,
     },
     textInputContainerStyle: {
       marginHorizontal: 10,
@@ -352,7 +356,7 @@ const RegisterScreen = ({navigation}) => {
     },
     textLabelStyle: {
       color: COLORS.n6,
-      fontSize: 11,
+      fontSize: 14,
       lineHeight: 16,
       fontFamily: 'Roboto-Regular',
     },
@@ -384,7 +388,7 @@ const RegisterScreen = ({navigation}) => {
 
     textProvince: {
       color: COLORS.primary,
-      fontSize: 12,
+      fontSize: 14,
       flex: 1,
     },
   });
@@ -417,18 +421,22 @@ const RegisterScreen = ({navigation}) => {
     }
     setIsModalVisible(false);
   };
+  const insets = useSafeAreaInsets();
   return (
     <View style={styles.container}>
-      <View style={{flex: 1}}>
-        {isLoading && <Spinner visible={true} />}
-        <SafeAreaView>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={{flex: 1}}>
+        <View style={{flex: 1}}>
+          {isLoading && <Spinner visible={true} />}
           <LinearGradient
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 1}}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 1}}
             colors={[COLORS.gradient1, COLORS.gradient3]}
             style={{
               paddingVertical: 10,
-              height:60,
+              height: 60 + insets.top,
+              paddingTop: insets.top,
               flexDirection: 'row',
               width: '100%',
               alignItems: 'center', // Center items vertically within LinearGradient
@@ -460,530 +468,540 @@ const RegisterScreen = ({navigation}) => {
                   alignItems: 'center',
                   marginStart: -34,
                   alignSelf: 'center',
-                  fontSize: 16,
+                  fontSize: 18,
                 }}>
                 {t('sign_up_upper')}
               </Text>
             </View>
           </LinearGradient>
-        </SafeAreaView>
-        <ScrollView
-          style={{flex: 1}}
-          contentContainerStyle={{paddingBottom: 20}}>
-          <FloatingLabelInput
-            onChangeText={text => setInsuranceId(text)}
-            containerStyles={styles.textInputContainerStyle}
-            value={insuranceId}
-            style={styles.textInput}
-            customLabelStyles={{leftBlurred: -1}}
-            label={
-              <Text style={styles.textLabelStyle}>
-                {t('social_insurance_code')}
-                <Text style={{color: 'red'}}> *</Text>
+          <ScrollView
+            style={{flex: 1}}
+            contentContainerStyle={{paddingBottom: 20}}>
+            <FloatingLabelInput
+              onChangeText={text => setInsuranceId(text)}
+              containerStyles={styles.textInputContainerStyle}
+              value={insuranceId}
+              style={styles.textInput}
+              customLabelStyles={{leftBlurred: -1}}
+              label={
+                <Text style={styles.textLabelStyle}>
+                  {t('social_insurance_code')}
+                  <Text style={{color: 'red'}}> *</Text>
+                </Text>
+              }
+              rightComponent={
+                <View style={{flexDirection: 'row'}}>
+                  <Image style={styles.image1} source={images.search} />
+                  <Image
+                    style={[styles.image1, {marginStart: 10}]}
+                    source={images.qr_code}
+                  />
+                </View>
+              }
+            />
+            <FloatingLabelInput
+              value={fullName}
+              isFocused={isFocused1}
+              onBlur={() => {
+                setIsFocused1(false);
+                handleBlur1();
+              }}
+              onFocus={() => {
+                setIsFocused1(true);
+                handleFocus1();
+              }}
+              onChangeText={text => setFullName(text)}
+              containerStyles={styles.textInputContainerStyle}
+              style={styles.textInput}
+              customLabelStyles={{leftBlurred: -1}}
+              label={
+                <Text style={styles.textLabelStyle}>
+                  {t('full_name')}
+                  <Text style={styles.sao}> *</Text>
+                </Text>
+              }
+              rightComponent={
+                <Animated.Image
+                  style={[
+                    styles.image,
+                    {transform: [{translateX: floatingLabelImageAnimation}]},
+                  ]}
+                  source={images.pencil}
+                />
+              }
+            />
+            {fullName != '' && (
+              <Text
+                style={{
+                  marginTop: 10,
+                  marginStart: 10,
+                  color: COLORS.secondary4,
+                  fontSize: 11,
+                  fontFamily: 'Roboto-Regular',
+                }}>
+                {t('note_enter')}
               </Text>
-            }
-            rightComponent={
-              <View style={{flexDirection: 'row'}}>
-                <Image style={styles.image1} source={images.search} />
-                <Image
-                  style={[styles.image1, {marginStart: 10}]}
+            )}
+            <FloatingLabelInput
+              value={identifyPP}
+              onChangeText={text => setIdentifyPP(text)}
+              containerStyles={styles.textInputContainerStyle}
+              style={styles.textInput}
+              customLabelStyles={{leftBlurred: -1}}
+              rightComponent={
+                <Animated.Image
+                  style={[styles.image1]}
                   source={images.qr_code}
                 />
-              </View>
-            }
-          />
-          <FloatingLabelInput
-            value={fullName}
-            isFocused={isFocused1}
-            onBlur={() => {
-              setIsFocused1(false);
-              handleBlur1();
-            }}
-            onFocus={() => {
-              setIsFocused1(true);
-              handleFocus1();
-            }}
-            onChangeText={text => setFullName(text)}
-            containerStyles={styles.textInputContainerStyle}
-            style={styles.textInput}
-            customLabelStyles={{leftBlurred: -1}}
-            label={
-              <Text style={styles.textLabelStyle}>
-                {t('full_name')}
-                <Text style={styles.sao}> *</Text>
-              </Text>
-            }
-            rightComponent={
-              <Animated.Image
-                style={[
-                  styles.image,
-                  {transform: [{translateX: floatingLabelImageAnimation}]},
-                ]}
-                source={images.pencil}
-              />
-            }
-          />
-          {fullName != '' && (
-            <Text
-              style={{
-                marginTop: 10,
-                marginStart: 10,
-                color: COLORS.secondary4,
-                fontSize: 11,
-                fontFamily: 'Roboto-Regular',
-              }}>
-              {t('note_enter')}
-            </Text>
-          )}
-          <FloatingLabelInput
-            value={identifyPP}
-            onChangeText={text => setIdentifyPP(text)}
-            containerStyles={styles.textInputContainerStyle}
-            style={styles.textInput}
-            customLabelStyles={{leftBlurred: -1}}
-            rightComponent={
-              <Animated.Image style={[styles.image1]} source={images.qr_code} />
-            }
-            label={
-              <Text style={styles.textLabelStyle}>
-                {t("identification_pp")}<Text style={styles.sao}> *</Text>
-              </Text>
-            }
-          />
-          <FloatingLabelInput
-            value={dateOfBirth}
-            onChangeText={text => setDateOfBirth(text)}
-            containerStyles={styles.textInputContainerStyle}
-            style={styles.textInput}
-            keyboardType="numeric"
-            mask="99/99/9999"
-            isFocused={isFocused4}
-            onBlur={() => {
-              handleBlur4();
-            }}
-            onFocus={() => {
-              handleFocus4();
-            }}
-            customLabelStyles={{leftBlurred: -1}}
-            rightComponent={
-              <Animated.Image
-                style={[
-                  styles.image,
-                  {transform: [{translateX: floatingLabelImageAnimation4}]},
-                ]}
-                source={images.pencil}
-              />
-            }
-            label={
-              <Text style={styles.textLabelStyle}>
-                {t("dateOfBirth")}<Text style={styles.sao}> *</Text>
-              </Text>
-            }
-          />
-          <View
-            style={{
-              flexDirection: 'row',
-              width: '100%',
-              marginTop: 20,
-              marginStart: 10,
-            }}>
-            <Text style={styles.textLabelStyle}>
-              {t("gender")}<Text style={styles.sao}> *</Text>
-            </Text>
+              }
+              label={
+                <Text style={styles.textLabelStyle}>
+                  {t('identification_pp')}
+                  <Text style={styles.sao}> *</Text>
+                </Text>
+              }
+            />
+            <FloatingLabelInput
+              value={dateOfBirth}
+              onChangeText={text => setDateOfBirth(text)}
+              containerStyles={styles.textInputContainerStyle}
+              style={styles.textInput}
+              keyboardType="numeric"
+              mask="99/99/9999"
+              isFocused={isFocused4}
+              onBlur={() => {
+                handleBlur4();
+              }}
+              onFocus={() => {
+                handleFocus4();
+              }}
+              customLabelStyles={{leftBlurred: -1}}
+              rightComponent={
+                <Animated.Image
+                  style={[
+                    styles.image,
+                    {transform: [{translateX: floatingLabelImageAnimation4}]},
+                  ]}
+                  source={images.pencil}
+                />
+              }
+              label={
+                <Text style={styles.textLabelStyle}>
+                  {t('dateOfBirth')}
+                  <Text style={styles.sao}> *</Text>
+                </Text>
+              }
+            />
             <View
               style={{
-                flex: 1,
                 flexDirection: 'row',
-                justifyContent: 'space-around',
+                width: '100%',
+                marginTop: 20,
+                marginStart: 10,
               }}>
-              <TouchableOpacity
-                onPress={() => setGender('0')}
-                style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Image
-                  style={{width: 16, height: 16}}
-                  source={
-                    gender === '0' ? images.checkActive : images.checkInActive
-                  }
-                />
-                <Text
-                  style={{
-                    fontFamily: 'Roboto-Regular',
-                    fontSize: 11,
-                    color: COLORS.n6,
-                    marginStart: 10,
-                  }}>
-                  {t("male")}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => setGender('1')}
-                style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Image
-                  style={{width: 16, height: 16}}
-                  source={
-                    gender === '1' ? images.checkActive : images.checkInActive
-                  }
-                />
-                <Text
-                  style={{
-                    fontFamily: 'Roboto-Regular',
-                    fontSize: 11,
-                    color: COLORS.n6,
-                    marginStart: 10,
-                  }}>
-                  {t("female")}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={styles.miniContainer}>
-            <Text style={styles.textInput}>
-              {t("contact_address")}<Text style={styles.sao}>*</Text>
-            </Text>
-            <View style={{flex: 1}}>
-              <TouchableOpacity
-                onPress={() => {
-                  setIndexData(0);
-                  setIsModalVisible(true);
-                }}
-                style={[styles.dropDownContainer, {marginTop: 0}]}>
-                <Text style={styles.textProvince}>
-                  {province.length == 0 ? t("province") : province}
-                </Text>
-                <Image style={styles.image1} source={images.view_up} />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  setIndexData(1);
-                  setIsModalVisible(true);
-                }}
-                style={styles.dropDownContainer}>
-                <Text style={styles.textProvince}>
-                  {district.length > 0 ? district : t("district")}
-                </Text>
-                <Image style={styles.image1} source={images.view_up} />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  setIndexData(2);
-                  setIsModalVisible(true);
-                }}
-                style={styles.dropDownContainer}>
-                <Text style={styles.textProvince}>
-                  {ward.length > 0 ? ward : t("ward")}
-                </Text>
-                <Image style={styles.image1} source={images.view_up} />
-              </TouchableOpacity>
-            </View>
-          </View>
-          <FloatingLabelInput
-            value={houseNumber}
-            onChangeText={text => setHouseNumber(text)}
-            containerStyles={styles.textInputContainerStyle}
-            onBlur={() => handleBlur2()}
-            onFocus={() => handleFocus2()}
-            isFocused={isFocused2}
-            style={styles.textInput}
-            customLabelStyles={{leftBlurred: -1}}
-            rightComponent={
-              <Animated.Image
-                style={[
-                  styles.image,
-                  {transform: [{translateX: floatingLabelImageAnimation2}]},
-                ]}
-                source={images.pencil}
-              />
-            }
-            label={
               <Text style={styles.textLabelStyle}>
-                {t("house_number")}
+                {t('gender')}
                 <Text style={styles.sao}> *</Text>
               </Text>
-            }
-          />
-          <FloatingLabelInput
-            value={phoneNumber}
-            onChangeText={text => setPhoneNumber(text)}
-            containerStyles={styles.textInputContainerStyle}
-            style={styles.textInput}
-            onBlur={() => handleBlur3()}
-            keyboardType="numeric"
-            onFocus={() => handleFocus3()}
-            isFocused={isFocused3}
-            customLabelStyles={{leftBlurred: -1}}
-            rightComponent={
-              <Animated.Image
-                style={[
-                  styles.image,
-                  {transform: [{translateX: floatingLabelImageAnimation3}]},
-                ]}
-                source={images.pencil}
-              />
-            }
-            label={
-              <Text style={styles.textLabelStyle}>
-                {t("phone_number")}<Text style={styles.sao}> *</Text>
-              </Text>
-            }
-          />
-          {phoneNumber != '' && (
-            <Text
-              style={{
-                marginTop: 10,
-                marginStart: 10,
-                color: COLORS.secondary4,
-                fontSize: 11,
-                fontFamily: 'Roboto-Regular',
-              }}>
-              {t("note_phone")}
-            </Text>
-          )}
-          <FloatingLabelInput
-            value={password}
-            isPassword={true}
-            onChangeText={text => setPassword(text)}
-            containerStyles={styles.textInputContainerStyle}
-            style={styles.textInput}
-            customShowPasswordComponent={
-              <Image
-                style={{width: 24, height: 24, tintColor: '#3a679e'}}
-                source={images.eye}
-              />
-            }
-            customHidePasswordComponent={
-              <Image
-                style={{width: 24, height: 24, tintColor: '#3a679e'}}
-                source={images.eye_1}
-              />
-            }
-            customLabelStyles={{leftBlurred: -1}}
-            label={
-              <Text style={styles.textLabelStyle}>
-                {t("password")}<Text style={styles.sao}> *</Text>
-              </Text>
-            }
-          />
-          <FloatingLabelInput
-            value={confirmPassword}
-            isPassword={true}
-            onChangeText={text => setConfirmPassword(text)}
-            containerStyles={styles.textInputContainerStyle}
-            style={styles.textInput}
-            customShowPasswordComponent={
-              <Image
-                style={{width: 24, height: 24, tintColor: '#3a679e'}}
-                source={images.eye}
-              />
-            }
-            customHidePasswordComponent={
-              <Image
-                style={{width: 24, height: 24, tintColor: '#3a679e'}}
-                source={images.eye_1}
-              />
-            }
-            onBlur={() => handleBlur3()}
-            onFocus={() => handleFocus3()}
-            customLabelStyles={{leftBlurred: -1}}
-            label={
-              <Text style={styles.textLabelStyle}>
-                {t("confirm_pass")}<Text style={styles.sao}> *</Text>
-              </Text>
-            }
-          />
-          <TouchableOpacity
-            onPress={async () => {
-              if (validateForm()) {
-                register(
-                  insuranceId,
-                  fullName,
-                  identifyPP,
-                  dateOfBirth,
-                  gender,
-                  province,
-                  district,
-                  ward,
-                  houseNumber,
-                  phoneNumber,
-                  password,
-                );
-              }
-            }}>
-            <Text
-              style={{
-                color: COLORS.primary,
-                fontSize: 14,
-                alignSelf: 'flex-end',
-                marginTop: 24,
-                marginEnd: 10,
-              }}>
-              {t("continue")}
-            </Text>
-          </TouchableOpacity>
-
-          {isModalVisible && (
-            <Modal transparent={true}>
-              <TouchableOpacity
-                onPress={() => {
-                  console.log('asdasd');
-                  setIsModalVisible(false);
-                }}
-                style={{flex: 1, backgroundColor: 'rgba(0,0,0,0.7)'}}>
-                <SafeAreaView
-                  onStartShouldSetResponder={e => true}
-                  style={{
-                    backgroundColor: 'white',
-                    marginHorizontal: 30,
-                    marginVertical: 14,
-                    flex: 1,
-                  }}>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      backgroundColor: COLORS.gradient2,
-                      padding: 10,
-                    }}>
-                    <Image
-                      style={{height: 20, width: 20}}
-                      source={images.search}
-                    />
-                    <TextInput
-                      onChangeText={text => filterData(text)}
-                      style={{marginHorizontal: 10, flex: 1}}
-                      placeholder={t("search")}
-                    />
-                  </View>
-
-                  <ScrollView
-                    style={{
-                      flex: 1,
-                      paddingBottom: 10,
-                      paddingHorizontal: 10,
-                    }}>
-                    {listDataFilter.map(item => {
-                      return (
-                        <TouchableWithoutFeedback
-                          key={item.Code}
-                          onPress={e => e.stopPropagation()}
-                          style={{flex: 1}}>
-                          <Text
-                            onPress={() => handleClickData(item.FullName)}
-                            style={{
-                              marginTop: 14,
-                              fontSize: 14,
-                              flex: 1,
-                              color: COLORS.secondary1,
-                            }}>
-                            {item.FullName}
-                          </Text>
-                        </TouchableWithoutFeedback>
-                      );
-                    })}
-                  </ScrollView>
-
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      backgroundColor: COLORS.primary,
-                    }}>
-                    <View
-                      style={{backgroundColor: COLORS.secondary4, padding: 4}}>
-                      <TouchableOpacity
-                        onPress={() => {
-                          setIsModalVisible(false);
-                        }}>
-                        <Image
-                          source={images.back}
-                          style={{height: 20, width: 20}}
-                        />
-                      </TouchableOpacity>
-                    </View>
-                    <Text
-                      onPress={() => {
-                        setIsModalVisible(false);
-                      }}
-                      style={{
-                        flex: 1,
-                        height: '100%',
-                        color: 'white',
-                        textAlignVertical: 'bottom',
-                        paddingTop: 4,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        textAlign: 'center',
-                        alignContent: 'center',
-                      }}>
-                      {t("choose")}
-                    </Text>
-                  </View>
-                </SafeAreaView>
-              </TouchableOpacity>
-            </Modal>
-          )}
-
-          {shouldShowError && (
-            <Modal transparent={true}>
-              <TouchableOpacity
-                onPress={() => {
-                  setShouldShowError(false);
-                }}
+              <View
                 style={{
                   flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  backgroundColor: 'rgba(0,0,0,0.7)',
+                  flexDirection: 'row',
+                  justifyContent: 'space-around',
                 }}>
-                <View
-                  style={{
-                    width: '75%',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: 'white',
-                    borderRadius: 10,
-                    paddingVertical: 10,
-                    paddingHorizontal: 10,
-                  }}>
+                <TouchableOpacity
+                  onPress={() => setGender('0')}
+                  style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Image
+                    style={{width: 16, height: 16}}
+                    source={
+                      gender === '0' ? images.checkActive : images.checkInActive
+                    }
+                  />
                   <Text
                     style={{
-                      color: COLORS.n5,
-                      fontSize: 16,
-                      fontFamily: 'Roboto-Medium',
-                    }}>
-                    {t("notice")}
-                  </Text>
-                  <Text
-                    style={{
-                      marginTop: 10,
-                      color: COLORS.n6,
                       fontFamily: 'Roboto-Regular',
                       fontSize: 14,
+                      color: COLORS.n6,
+                      marginStart: 10,
                     }}>
-                    {textError}
+                    {t('male')}
                   </Text>
-                  <TouchableOpacity
-                    onPress={() => setShouldShowError(false)}
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => setGender('1')}
+                  style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Image
+                    style={{width: 16, height: 16}}
+                    source={
+                      gender === '1' ? images.checkActive : images.checkInActive
+                    }
+                  />
+                  <Text
                     style={{
-                      marginTop: 12,
-                      borderColor: COLORS.primary,
-                      borderRadius: 6,
-                      borderWidth: 1,
+                      fontFamily: 'Roboto-Regular',
+                      fontSize: 14,
+                      color: COLORS.n6,
+                      marginStart: 10,
+                    }}>
+                    {t('female')}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View style={styles.miniContainer}>
+              <Text style={styles.textInput}>
+                {t('contact_address')}
+                <Text style={styles.sao}>*</Text>
+              </Text>
+              <View style={{flex: 1}}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setIndexData(0);
+                    setIsModalVisible(true);
+                  }}
+                  style={[styles.dropDownContainer, {marginTop: 0}]}>
+                  <Text style={styles.textProvince}>
+                    {province.length == 0 ? t('province') : province}
+                  </Text>
+                  <Image style={styles.image1} source={images.view_up} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setIndexData(1);
+                    setIsModalVisible(true);
+                  }}
+                  style={styles.dropDownContainer}>
+                  <Text style={styles.textProvince}>
+                    {district.length > 0 ? district : t('district')}
+                  </Text>
+                  <Image style={styles.image1} source={images.view_up} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setIndexData(2);
+                    setIsModalVisible(true);
+                  }}
+                  style={styles.dropDownContainer}>
+                  <Text style={styles.textProvince}>
+                    {ward.length > 0 ? ward : t('ward')}
+                  </Text>
+                  <Image style={styles.image1} source={images.view_up} />
+                </TouchableOpacity>
+              </View>
+            </View>
+            <FloatingLabelInput
+              value={houseNumber}
+              onChangeText={text => setHouseNumber(text)}
+              containerStyles={styles.textInputContainerStyle}
+              onBlur={() => handleBlur2()}
+              onFocus={() => handleFocus2()}
+              isFocused={isFocused2}
+              style={styles.textInput}
+              customLabelStyles={{leftBlurred: -1}}
+              rightComponent={
+                <Animated.Image
+                  style={[
+                    styles.image,
+                    {transform: [{translateX: floatingLabelImageAnimation2}]},
+                  ]}
+                  source={images.pencil}
+                />
+              }
+              label={
+                <Text style={styles.textLabelStyle}>
+                  {t('house_number')}
+                  <Text style={styles.sao}> *</Text>
+                </Text>
+              }
+            />
+            <FloatingLabelInput
+              value={phoneNumber}
+              onChangeText={text => setPhoneNumber(text)}
+              containerStyles={styles.textInputContainerStyle}
+              style={styles.textInput}
+              onBlur={() => handleBlur3()}
+              keyboardType="numeric"
+              onFocus={() => handleFocus3()}
+              isFocused={isFocused3}
+              customLabelStyles={{leftBlurred: -1}}
+              rightComponent={
+                <Animated.Image
+                  style={[
+                    styles.image,
+                    {transform: [{translateX: floatingLabelImageAnimation3}]},
+                  ]}
+                  source={images.pencil}
+                />
+              }
+              label={
+                <Text style={styles.textLabelStyle}>
+                  {t('phone_number')}
+                  <Text style={styles.sao}> *</Text>
+                </Text>
+              }
+            />
+            {phoneNumber != '' && (
+              <Text
+                style={{
+                  marginTop: 10,
+                  marginStart: 10,
+                  color: COLORS.secondary4,
+                  fontSize: 11,
+                  fontFamily: 'Roboto-Regular',
+                }}>
+                {t('note_phone')}
+              </Text>
+            )}
+            <FloatingLabelInput
+              value={password}
+              isPassword={true}
+              onChangeText={text => setPassword(text)}
+              containerStyles={styles.textInputContainerStyle}
+              style={styles.textInput}
+              customShowPasswordComponent={
+                <Image
+                  style={{width: 34, height: 34, tintColor: '#3a679e'}}
+                  source={images.eye}
+                />
+              }
+              customHidePasswordComponent={
+                <Image
+                  style={{width: 34, height: 34, tintColor: '#3a679e'}}
+                  source={images.eye_1}
+                />
+              }
+              customLabelStyles={{leftBlurred: -1}}
+              label={
+                <Text style={styles.textLabelStyle}>
+                  {t('password')}
+                  <Text style={styles.sao}> *</Text>
+                </Text>
+              }
+            />
+            <FloatingLabelInput
+              value={confirmPassword}
+              isPassword={true}
+              onChangeText={text => setConfirmPassword(text)}
+              containerStyles={styles.textInputContainerStyle}
+              style={styles.textInput}
+              customShowPasswordComponent={
+                <Image
+                  style={{width: 34, height: 34, tintColor: '#3a679e'}}
+                  source={images.eye}
+                />
+              }
+              customHidePasswordComponent={
+                <Image
+                  style={{width: 34, height: 34, tintColor: '#3a679e'}}
+                  source={images.eye_1}
+                />
+              }
+              customLabelStyles={{leftBlurred: -1}}
+              label={
+                <Text style={styles.textLabelStyle}>
+                  {t('confirm_pass')}
+                  <Text style={styles.sao}> *</Text>
+                </Text>
+              }
+            />
+            <TouchableOpacity
+              style={{marginTop: 24,paddingVertical:12, marginEnd: 10,width:120,alignSelf:"flex-end"}}
+              onPress={async () => {
+                if (validateForm()) {
+                  register(
+                    insuranceId,
+                    fullName,
+                    identifyPP,
+                    dateOfBirth,
+                    gender,
+                    province,
+                    district,
+                    ward,
+                    houseNumber,
+                    phoneNumber,
+                    password,
+                  );
+                }
+              }}>
+              <Text
+                style={{
+                  color: COLORS.primary,
+                  fontSize: 18,
+                  alignSelf: 'flex-end',
+                  fontFamily: 'Roboto-Medium',
+                }}>
+                {t('continue')}
+              </Text>
+            </TouchableOpacity>
+
+            {isModalVisible && (
+              <Modal transparent={true}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setIsModalVisible(false);
+                  }}
+                  style={{flex: 1, backgroundColor: 'rgba(0,0,0,0.7)'}}>
+                  <SafeAreaView
+                    onStartShouldSetResponder={e => true}
+                    style={{
+                      backgroundColor: 'white',
+                      marginHorizontal: 30,
+                      marginVertical: 14,
+                      flex: 1,
+                    }}>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        backgroundColor: COLORS.gradient2,
+                        padding: 10,
+                      }}>
+                      <Image
+                        style={{height: 20, width: 20}}
+                        source={images.search}
+                      />
+                      <TextInput
+                        onChangeText={text => filterData(text)}
+                        style={{marginHorizontal: 10, flex: 1}}
+                        placeholder={t('search')}
+                      />
+                    </View>
+
+                    <ScrollView
+                      style={{
+                        flex: 1,
+                        paddingBottom: 10,
+                        paddingHorizontal: 10,
+                      }}>
+                      {listDataFilter.map(item => {
+                        return (
+                          <TouchableWithoutFeedback
+                            key={item.Code}
+                            onPress={e => e.stopPropagation()}
+                            style={{flex: 1}}>
+                            <Text
+                              onPress={() => handleClickData(item.FullName)}
+                              style={{
+                                marginTop: 14,
+                                fontSize: 14,
+                                flex: 1,
+                                color: COLORS.secondary1,
+                              }}>
+                              {item.FullName}
+                            </Text>
+                          </TouchableWithoutFeedback>
+                        );
+                      })}
+                    </ScrollView>
+
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        backgroundColor: COLORS.primary,
+                      }}>
+                      <View
+                        style={{
+                          backgroundColor: COLORS.secondary4,
+                          padding: 4,
+                        }}>
+                        <TouchableOpacity
+                          onPress={() => {
+                            setIsModalVisible(false);
+                          }}>
+                          <Image
+                            source={images.back}
+                            style={{height: 20, width: 20}}
+                          />
+                        </TouchableOpacity>
+                      </View>
+                      <Text
+                        onPress={() => {
+                          setIsModalVisible(false);
+                        }}
+                        style={{
+                          flex: 1,
+                          height: '100%',
+                          color: 'white',
+                          textAlignVertical: 'bottom',
+                          paddingTop: 4,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          textAlign: 'center',
+                          alignContent: 'center',
+                        }}>
+                        {t('choose')}
+                      </Text>
+                    </View>
+                  </SafeAreaView>
+                </TouchableOpacity>
+              </Modal>
+            )}
+
+            {shouldShowError && (
+              <Modal transparent={true}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setShouldShowError(false);
+                  }}
+                  style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: 'rgba(0,0,0,0.7)',
+                  }}>
+                  <View
+                    style={{
+                      width: '75%',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      backgroundColor: 'white',
+                      borderRadius: 10,
+                      paddingVertical: 10,
+                      paddingHorizontal: 10,
                     }}>
                     <Text
                       style={{
-                        color: COLORS.primary,
+                        color: COLORS.n5,
+                        fontSize: 16,
+                        fontFamily: 'Roboto-Medium',
+                      }}>
+                      {t('notice')}
+                    </Text>
+                    <Text
+                      style={{
+                        marginTop: 10,
+                        color: COLORS.n6,
                         fontFamily: 'Roboto-Regular',
                         fontSize: 14,
-                        paddingVertical: 6,
-                        paddingHorizontal: 30,
                       }}>
-                      {t("close")}
+                      {textError}
                     </Text>
-                  </TouchableOpacity>
-                </View>
-              </TouchableOpacity>
-            </Modal>
-          )}
-        </ScrollView>
-      </View>
+                    <TouchableOpacity
+                      onPress={() => setShouldShowError(false)}
+                      style={{
+                        marginTop: 12,
+                        borderColor: COLORS.primary,
+                        borderRadius: 6,
+                        borderWidth: 1,
+                      }}>
+                      <Text
+                        style={{
+                          color: COLORS.primary,
+                          fontFamily: 'Roboto-Regular',
+                          fontSize: 14,
+                          paddingVertical: 6,
+                          paddingHorizontal: 30,
+                        }}>
+                        {t('close')}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </TouchableOpacity>
+              </Modal>
+            )}
+          </ScrollView>
+        </View>
+      </KeyboardAvoidingView>
     </View>
   );
 };

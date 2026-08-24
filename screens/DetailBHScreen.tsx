@@ -103,7 +103,7 @@ const DetailBHScreen = ({navigation, route}) => {
           {t('jobTitle')}: {data.nghe_nghiep}
         </Text>
         <Text style={styles.text2}>
-          {t('Employer')}: {data.don_vi_cong_tac}
+          {t('employer')}: {data.don_vi_cong_tac}
         </Text>
         <Text style={styles.text2}>
           {t('workAddress')}: {data.noi_lam_viec}

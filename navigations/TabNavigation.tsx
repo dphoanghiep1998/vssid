@@ -16,6 +16,7 @@ import C14Screen from '../screens/C14Screen';
 import {COLORS, images} from '../constants/theme';
 import {LinearGradient} from 'react-native-linear-gradient';
 import {useTranslation} from 'react-i18next';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const Tab = createMaterialTopTabNavigator();
 const TabNavigation = ({navigation, route}) => {
@@ -25,6 +26,7 @@ const TabNavigation = ({navigation, route}) => {
     label: {
       marginTop: 4,
       fontSize: 14,
+      width: 80,
       fontFamily: 'Roboto-Regular',
       textTransform: 'none',
     },
@@ -33,50 +35,49 @@ const TabNavigation = ({navigation, route}) => {
       height: 55,
     },
   });
+  const insets = useSafeAreaInsets();
   return (
     <View style={{flex: 1}}>
-      <SafeAreaView>
-        <LinearGradient
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 1}}
+      <LinearGradient
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 1}}
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          paddingVertical: 10,
+          height: 60 + insets.top,
+          paddingTop: insets.top,
+        }}
+        colors={[COLORS.gradient1, COLORS.gradient3]}>
+        <TouchableOpacity
           style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            paddingVertical: 10,
-            height: 60,
+            zIndex: 10,
+            height: 30,
+            width: 30,
+            marginStart: 10,
           }}
-          colors={[COLORS.gradient1, COLORS.gradient3]}>
-          <TouchableOpacity
+          onPress={() => navigation.goBack()}>
+          <Image
             style={{
-              zIndex: 10,
-              height: 30,
-              width: 30,
-              marginStart: 10,
+              width: 24,
+              height: 24,
+              tintColor: 'white',
             }}
-            onPress={() => navigation.goBack()}>
-            <Image
-              style={{
-                width: 24,
-                height: 24,
-                tintColor: 'white',
-              }}
-              source={images.back}
-            />
-          </TouchableOpacity>
-          <Text
-            style={{
-              zIndex: 1,
-              color: 'white',
-              flex: 1,
-              textAlign: 'center',
-              fontSize: 16,
-              marginStart:-37,
-             
-            }}>
-            {t('participation_record_up')}
-          </Text>
-        </LinearGradient>
-      </SafeAreaView>
+            source={images.back}
+          />
+        </TouchableOpacity>
+        <Text
+          style={{
+            zIndex: 1,
+            color: 'white',
+            flex: 1,
+            textAlign: 'center',
+            fontSize: 18,
+            marginStart: -37,
+          }}>
+          {t('participation_record_up')}
+        </Text>
+      </LinearGradient>
       <Tab.Navigator
         initialRouteName={initName ? initName : null}
         screenOptions={{

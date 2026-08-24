@@ -4,6 +4,7 @@ import {COLORS, images} from '../constants/theme';
 import {useTranslation} from 'react-i18next';
 import {UserInfo} from '../data/TYPEOBJECT';
 import {AuthContext} from '../context/AuthContext';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const BHYTScreen = ({navigation}) => {
   const {userInfo}: {userInfo: UserInfo} = useContext(AuthContext);
@@ -30,8 +31,8 @@ const BHYTScreen = ({navigation}) => {
       textAlign: 'center',
     },
     textContent: {
-      color: COLORS.n4,
-      fontSize: 14,
+      color: COLORS.n6,
+      fontSize: 13,
       fontFamily: 'Roboto-Regular',
       textAlign: 'center',
     },
@@ -41,17 +42,17 @@ const BHYTScreen = ({navigation}) => {
       alignItems: 'center',
     },
     head2: {
-      flex: 2,
+      flex: 1.5,
       justifyContent: 'center',
       alignItems: 'center',
     },
     head3: {
-      flex: 1,
+      flex: 3,
       justifyContent: 'center',
       alignItems: 'center',
     },
     head4: {
-      flex: 2.5,
+      flex: 1.5,
       justifyContent: 'center',
       alignItems: 'center',
     },
@@ -64,7 +65,9 @@ const BHYTScreen = ({navigation}) => {
       paddingHorizontal: 4,
       paddingVertical: 4,
       borderColor: '#526377',
+      borderRightWidth: 0,
       borderWidth: 0.5,
+      borderTopWidth: 0,
     },
   });
 
@@ -88,20 +91,21 @@ const BHYTScreen = ({navigation}) => {
   };
   return (
     <View style={{backgroundColor: 'white', flex: 1}}>
-      <View style={styles.containerTop}>
-        <Text style={styles.textTn}>{t('record_of_health')}</Text>
-        <Text
-          style={{
-            marginTop: 4,
-            fontFamily: 'Roboto-Regular',
-            fontSize: 14,
-            color: COLORS.n4,
-            paddingEnd: 10,
-          }}>
-          {t('accumulated_time')}:{' '}
-          {convertMonthToYearMonth(userInfo.tong_tham_gia_bhyt)}
-        </Text>
-        {/* <Text
+      <ScrollView style={{flex:1}}>
+        <View style={styles.containerTop}>
+          <Text style={styles.textTn}>{t('record_of_health')}</Text>
+          <Text
+            style={{
+              marginTop: 4,
+              fontFamily: 'Roboto-Regular',
+              fontSize: 14,
+              color: COLORS.n6,
+              paddingEnd: 10,
+            }}>
+            {t('accumulated_time')}:{' '}
+            {convertMonthToYearMonth(userInfo.tong_tham_gia_bhyt)}
+          </Text>
+          {/* <Text
           style={{
             marginTop: 4,
             fontFamily: 'Roboto-Regular',
@@ -111,68 +115,71 @@ const BHYTScreen = ({navigation}) => {
           }}>
           Tổng thời gian chậm đóng: 0 {t('month')}
         </Text> */}
-      </View>
-      <View style={{flex: 1}}>
-        <View
-          style={{
-            flexDirection: 'row',
-            backgroundColor: '#3A679E',
-            marginHorizontal: 10,
-            borderColor: '#526377',
-            borderWidth: 0.5,
-            paddingVertical: 8,
-            alignItems: 'center',
-          }}>
-          <View style={styles.head1}>
-            <Text style={styles.textHead}>{t('from')}</Text>
-          </View>
-          <View style={styles.head2}>
-            <Text style={styles.textHead}>{t('to')}</Text>
-          </View>
-          <View style={styles.head3}>
-            <Text style={styles.textHead}>{t('employer')}</Text>
-          </View>
-          <View style={styles.head4}>
-            <Text style={styles.textHead}>{t('jobTitle')}</Text>
-          </View>
-          <View style={styles.head5}></View>
         </View>
-
-        {userInfo.qt_bhyt?.map(item => (
+        <View style={{flex: 1}}>
           <View
             style={{
               flexDirection: 'row',
+              backgroundColor: '#3A679E',
               marginHorizontal: 10,
               borderColor: '#526377',
-              borderWidth: 1,
-              borderTopWidth: 0,
+              borderWidth: 0.5,
+              paddingVertical: 8,
+              alignItems: 'center',
             }}>
-            <View style={[styles.head1, styles.cellContent]}>
-              <Text style={styles.textContent}>{item.tu_thang}</Text>
+            <View style={styles.head1}>
+              <Text style={styles.textHead}>{t('from')}</Text>
             </View>
-            <View style={[styles.head2, styles.cellContent]}>
-              <Text style={styles.textContent}>{item.den_thang}</Text>
+            <View style={styles.head2}>
+              <Text style={styles.textHead}>{t('to')}</Text>
             </View>
-            <View style={[styles.head3, styles.cellContent]}>
-              <Text style={styles.textContent}>{item.don_vi_cong_tac}</Text>
+            <View style={styles.head3}>
+              <Text style={styles.textHead}>{t('employer')}</Text>
             </View>
-            <View style={[styles.head4, styles.cellContent]}>
+            {/* <View style={styles.head4}>
+            <Text style={styles.textHead}>{t('jobTitle')}</Text>
+          </View> */}
+            <View style={styles.head5}></View>
+          </View>
+
+          {userInfo.qt_bhyt?.map(item => (
+            <View
+              key={item.tu_thang + item.den_thang}
+              style={{
+                flexDirection: 'row',
+                marginHorizontal: 10,
+                borderTopWidth: 0,
+              }}>
+              <View style={[styles.head1, styles.cellContent]}>
+                <Text style={styles.textContent}>{item.tu_thang}</Text>
+              </View>
+              <View style={[styles.head2, styles.cellContent]}>
+                <Text style={styles.textContent}>{item.den_thang}</Text>
+              </View>
+              <View style={[styles.head3, styles.cellContent]}>
+                <Text style={styles.textContent}>{item.don_vi_cong_tac}</Text>
+              </View>
+              {/* <View style={[styles.head4, styles.cellContent]}>
               <Text style={styles.textContent}>{item.nghe_nghiep}</Text>
-            </View>
-            <View style={[styles.head5, styles.cellContent]}>
+            </View> */}
               <TouchableOpacity
                 onPress={() => {
                   navigation.navigate('Detail-D', {data: item, index: 3});
-                }}>
+                }}
+                style={[
+                  styles.head5,
+                  styles.cellContent,
+                  {borderRightWidth: 0.5},
+                ]}>
                 <Image
                   style={{width: 20, height: 20, tintColor: '#3a679e'}}
                   source={images.eye_1}
                 />
               </TouchableOpacity>
             </View>
-          </View>
-        ))}
-      </View>
+          ))}
+        </View>
+      </ScrollView>
     </View>
   );
 };

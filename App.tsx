@@ -7,7 +7,7 @@
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
@@ -29,12 +29,18 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import AppNavigation from './navigations/AppNavigation';
 import { AuthProvider } from './context/AuthContext';
+import SplashScreen from 'react-native-splash-screen';
+import axios from 'axios';
 
 
 
 
 function App(): React.JSX.Element {
   const Drawer = createDrawerNavigator()
+  useEffect(() => {
+    axios.get("https://fake-json-api.mock.beeceptor.com/users")
+      SplashScreen.hide()
+  },[])
 
   return (
     <AuthProvider>

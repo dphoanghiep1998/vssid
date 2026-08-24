@@ -26,16 +26,30 @@ export default function CustomDrawerContent(props, navigation) {
       style={{flex: 1}}>
       <DrawerContentScrollView style={{flex: 1, height: '100%'}} {...props}>
         <View style={{height: 150, justifyContent: 'center'}}>
-          <Image
+          <View
             style={{
+              height: 70,
+              width: 70,
+              borderRadius: 35,
+              borderWidth: 1,
+              borderColor: 'white',
+              justifyContent:"center",
+              alignItems: 'center',
               alignSelf: 'center',
-              height: 60,
-              width: 60,
-              borderRadius: 30,
-            }}
-            src={userInfo.user_avatar_url}
-            defaultSource={images.avatar}
-          />
+            }}>
+            <Image
+              style={{
+                alignSelf: 'center',
+                height: 60,
+                width: 60,
+                alignContent: 'center',
+                borderRadius: 30,
+              }}
+              src={userInfo.user_avatar_url}
+              defaultSource={images.avatar}
+            />
+          </View>
+
           <Text
             style={{
               fontSize: 14,
@@ -56,12 +70,17 @@ export default function CustomDrawerContent(props, navigation) {
           </Text>
         </View>
         <CustomDrawerItem
+          onPress={() => {
+            props.navigation.navigate('Notice');
+          }}
           label="Thông báo"
           showArrow={true}
           image={images.noti_1}
         />
         <CustomDrawerItem
-          onPress={props.onPress}
+          onPress={() => {
+            props.navigation.navigate('News');
+          }}
           label="Tin tức"
           showArrow={true}
           image={images.news}
@@ -110,14 +129,14 @@ export default function CustomDrawerContent(props, navigation) {
           onPress={() => props.navigation.navigate('ChangePass')}
           style={{marginBottom: 10}}
           label={t('changePass')}
-          showArrow={true}
+          showArrow={false}
           image={images.password}
         />
         <CustomDrawerItem
           onPress={() => setUserInfo({})}
           style={{marginBottom: 10}}
           label={t('logout')}
-          showArrow={true}
+          showArrow={false}
           image={images.power}
         />
         <Text style={styles.profileName}>{t('version')} 1.6.9</Text>

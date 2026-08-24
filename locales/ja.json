@@ -51,6 +51,7 @@
   "personalIdentification": "本人確認書類/パスポート",
   "address": "住所",
   "heath_card": "健康保険証",
+  "heath_card_full": "健康保険証",
   "social_security": "社会保障への参加記録",
   "entitlementInfor": "権利情報",
   "health_care_book": "ヘルスケアブック",
@@ -72,7 +73,9 @@
   "detail": "詳細",
   "from": "から...",
   "to": "...に...",
+  "to_2": "に",
   "jobTitle": "役職",
+  "jobTitle_2": "役職",
   "employer": "雇用主",
   "workAddress": "勤務先住所",
   "currency": "通貨",
@@ -83,6 +86,8 @@
   "accumulated_time": "累計貢献時間",
   "year": "年",
   "month": "月",
+  "years": "年",
+  "months": "月",
   "participation_record_up": "参加記録",
   "work_injure": "労働災害 - 職業病保険",
   "health_insurance": "健康保険",
@@ -115,5 +120,9 @@
   "salary_portion_3": "労働災害・職業病保険の拠出金に対する給与部分",
   "salary_portion_4": "健康保険の拠出金に対する給与部分",
   "settingUp": "設定",
-  "faceVerify": "顔認証"
+  "faceVerify": "顔認証",
+  "login_by_pass": "パスワードでログインしてください。",
+  "no_internet": "インターネット接続なし",
+  "require_internet_connection": "このページにはインターネット接続が必要です",
+  "reload": "再読み込み"
 }

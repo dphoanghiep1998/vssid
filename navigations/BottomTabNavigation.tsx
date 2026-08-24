@@ -19,6 +19,7 @@ const BottomTabNavigation = ({route}) => {
     label: {
       fontSize: 12,
       textAlign: 'center',
+      color: COLORS.n4,
       fontFamily: 'Roboto-Regular',
     },
   });
@@ -36,7 +37,7 @@ const BottomTabNavigation = ({route}) => {
           backgroundColor: 'white',
           paddingBottom: 24,
           height: 80,
-          paddingHorizontal:8,
+          paddingHorizontal: 8,
         },
         tabBarActiveTintColor: COLORS.primary,
         tabBarInactiveTintColor: COLORS.n4,
@@ -46,10 +47,7 @@ const BottomTabNavigation = ({route}) => {
         component={QLCNNavigation}
         options={{
           tabBarLabel: ({color}) => (
-            <Text
-              numberOfLines={1}
-              ellipsizeMode="tail"
-              style={[styles.label, {color: color}]}>
+            <Text numberOfLines={1} ellipsizeMode="tail" style={[styles.label]}>
               {t('personalInfoLow')}
             </Text>
           ),
@@ -66,10 +64,7 @@ const BottomTabNavigation = ({route}) => {
         component={PublicServiceScreen}
         options={{
           tabBarLabel: ({color}) => (
-            <Text
-              numberOfLines={1}
-              ellipsizeMode="tail"
-              style={[styles.label, {color: color}]}>
+            <Text numberOfLines={1} ellipsizeMode="tail" style={[styles.label]}>
               {t('publicServiceLow')}
             </Text>
           ),
@@ -86,10 +81,7 @@ const BottomTabNavigation = ({route}) => {
         component={ResearchScreen}
         options={{
           tabBarLabel: ({color}) => (
-            <Text
-              numberOfLines={1}
-              ellipsizeMode="tail"
-              style={[styles.label, {color: color}]}>
+            <Text numberOfLines={1} ellipsizeMode="tail" style={[styles.label]}>
               {t('searchLow')}
             </Text>
           ),
@@ -107,10 +99,7 @@ const BottomTabNavigation = ({route}) => {
         component={HelpScreen}
         options={{
           tabBarLabel: ({color}) => (
-            <Text
-              numberOfLines={1}
-              ellipsizeMode="tail"
-              style={[styles.label, {color: color}]}>
+            <Text numberOfLines={1} ellipsizeMode="tail" style={[styles.label]}>
               {t('supportLow')}
             </Text>
           ),

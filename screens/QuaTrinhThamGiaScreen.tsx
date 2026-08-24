@@ -4,20 +4,21 @@ import {Image, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
 import {LinearGradient} from 'react-native-linear-gradient';
 import {COLORS} from '../constants';
 import {images} from '../constants/theme';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const QuaTrinhThamGiaScreen = () => {
   const {t} = useTranslation();
+  const insets = useSafeAreaInsets()
   return (
     <View style={{flex: 1}}>
-      <SafeAreaView>
         <LinearGradient
           start={{x: 0, y: 0}}
           end={{x: 1, y: 1}}
           style={{
             flexDirection: 'row',
             alignItems: 'center',
-            paddingVertical: 10,
-            height: 60,
+            height: 60 + insets.top,
+              paddingTop:insets.top,
           }}
           colors={[COLORS.gradient1, COLORS.gradient3]}>
           <TouchableOpacity
@@ -35,13 +36,12 @@ const QuaTrinhThamGiaScreen = () => {
               color: 'white',
               flex: 1,
               textAlign: 'center',
-              fontSize: 16,
+              fontSize: 28,
               marginStart: -37,
             }}>
             {t('entitlementInfor')}
           </Text>
         </LinearGradient>
-      </SafeAreaView>
     </View>
   );
 };

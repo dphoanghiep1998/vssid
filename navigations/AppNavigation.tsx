@@ -7,6 +7,7 @@ import LoginScreen from '../screens/LoginScreen';
 import NoticeScreen from '../screens/NoticeScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import HomeNavigation from './HomeNavigation';
+import InfoLoginScreen from '../screens/InfoLoginScreen';
 const Stack = createNativeStackNavigator();
 
 const AppNavigation = () => {
@@ -35,6 +36,11 @@ const AppNavigation = () => {
             <Stack.Screen
               name="Notice"
               component={NoticeScreen}
+              options={{headerShown: false, headerTransparent: true}}
+            />
+            <Stack.Screen
+              name="Web"
+              component={InfoLoginScreen}
               options={{headerShown: false, headerTransparent: true}}
             />
           </>

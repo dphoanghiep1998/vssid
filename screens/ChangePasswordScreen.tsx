@@ -14,11 +14,12 @@ import React, {useContext, useState} from 'react';
 import {COLORS} from '../constants';
 import {images} from '../constants/theme';
 import axios from 'axios';
-import {BASE_URL} from '../constants/config';
+import {BASE_URL, TOKEN} from '../constants/config';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {AuthContext} from '../context/AuthContext';
 import {UserInfo} from '../data/TYPEOBJECT';
 import {useTranslation} from 'react-i18next';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const ChangePasswordScreen = ({navigation}) => {
   const [oldPassword, setOldPassword] = useState('');
@@ -44,7 +45,7 @@ const ChangePasswordScreen = ({navigation}) => {
   ) => {
     axios
       .post(`${BASE_URL}/vss/api/change_password`, {
-        token: '12345',
+        token: TOKEN,
         data: {
           ma_bhxh: insuranceId,
           mat_khau: oldPassword,
@@ -101,18 +102,18 @@ const ChangePasswordScreen = ({navigation}) => {
       marginBottom: 4,
     },
   });
+  const insets = useSafeAreaInsets()
   return (
     <View style={{flex: 1}}>
       {isLoading && <Spinner visible={true} />}
-      <SafeAreaView>
         <LinearGradient
         start={{x: 0, y: 0}}
         end={{x: 1, y: 1}}
           style={{
             flexDirection: 'row',
             alignItems: 'center',
-            paddingVertical: 10,
-            height:60
+            height: 60 + insets.top,
+              paddingTop:insets.top,
           }}
           colors={[COLORS.gradient1, COLORS.gradient3]}>
           <TouchableOpacity
@@ -136,7 +137,6 @@ const ChangePasswordScreen = ({navigation}) => {
             {t("changePasswordUP")}
           </Text>
         </LinearGradient>
-      </SafeAreaView>
       <View style={styles.container}>
         <TextInput
           value={oldPassword}

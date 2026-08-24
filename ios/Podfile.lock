@@ -962,6 +962,8 @@ PODS:
     - Yoga
   - react-native-safe-area-context (4.10.8):
     - React-Core
+  - react-native-splash-screen (3.3.0):
+    - React-Core
   - react-native-webview (13.10.5):
     - DoubleConversion
     - glog
@@ -1362,6 +1364,7 @@ DEPENDENCIES:
   - react-native-floating-label-input (from `../node_modules/react-native-floating-label-input`)
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-nativeconfig (from `../node_modules/react-native/ReactCommon`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
@@ -1466,6 +1469,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-pager-view"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-splash-screen:
+    :path: "../node_modules/react-native-splash-screen"
   react-native-webview:
     :path: "../node_modules/react-native-webview"
   React-nativeconfig:
@@ -1560,6 +1565,7 @@ SPEC CHECKSUMS:
   react-native-floating-label-input: 87443ecddba939a8d37b1917573a958cbef28162
   react-native-pager-view: 2a69ef1af5af548cf338947e3f70c1f291b67ff4
   react-native-safe-area-context: b7daa1a8df36095a032dff095a1ea8963cb48371
+  react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
   react-native-webview: 553abd09f58e340fdc7746c9e2ae096839e99911
   React-nativeconfig: ba9a2e54e2f0882cf7882698825052793ed4c851
   React-NativeModulesApple: 8d11ff8955181540585c944cf48e9e7236952697

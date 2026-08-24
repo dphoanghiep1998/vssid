@@ -14,6 +14,7 @@ import {images} from '../constants/theme';
 import {useTranslation} from 'react-i18next';
 import {AuthContext} from '../context/AuthContext';
 import i18next from 'i18next';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const SettingScreen = ({navigation}) => {
   const [isShowLang, setIsShowLang] = useState(false);
@@ -57,16 +58,16 @@ const SettingScreen = ({navigation}) => {
     },
     flag: {height: 32, width: 50, marginStart: 6},
   });
+  const insets = useSafeAreaInsets()
   return (
     <View>
-      <SafeAreaView>
         <LinearGradient
         start={{x: 0, y: 0}}
         end={{x: 1, y: 1}}
           colors={[COLORS.gradient1, COLORS.gradient3]}
           style={{
-            paddingVertical: 10,
-            height: 60,
+            height: 60 + insets.top,
+            paddingTop:insets.top,
             flexDirection: 'row',
             width: '100%',
             alignItems: 'center', // Center items vertically within LinearGradient
@@ -96,15 +97,14 @@ const SettingScreen = ({navigation}) => {
                 textAlign: 'center',
                 justifyContent: 'center',
                 alignItems: 'center',
-                marginStart: -34,
+                marginStart: -40,
                 alignSelf: 'center',
-                fontSize: 16,
+                fontSize: 18,
               }}>
               {t('settingUp')}
             </Text>
           </View>
         </LinearGradient>
-      </SafeAreaView>
       <TouchableOpacity
         onPress={() => setIsShowLang(true)}
         style={{

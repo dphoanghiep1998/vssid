@@ -13,6 +13,7 @@ import NoticeScreen from '../screens/NoticeScreen';
 import ThongTinHuongScreen from '../screens/ThongTinHuongScreen';
 import ChangePasswordScreen from '../screens/ChangePasswordScreen';
 import SettingScreen from '../screens/SettingScreen';
+import NewsScreen from '../screens/NewsScreen';
 
 const Drawer = createDrawerNavigator();
 const DrawerNavigation = () => {
@@ -79,6 +80,10 @@ const DrawerNavigation = () => {
       <Drawer.Screen
         name="Setting"
         component={SettingScreen}
+      />
+       <Drawer.Screen
+        name="News"
+        component={NewsScreen}
       />
     </Drawer.Navigator>
   );

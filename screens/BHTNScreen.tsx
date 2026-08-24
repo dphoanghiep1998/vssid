@@ -1,4 +1,11 @@
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import React, {useContext, useState} from 'react';
 import {COLORS} from '../constants';
 import {Row, Table} from 'react-native-table-component';
@@ -50,33 +57,33 @@ const BHTNScreen = () => {
       textAlign: 'center',
     },
     textContent: {
-      color: COLORS.n4,
-      fontSize: 14,
+      color: COLORS.n6,
+      fontSize: 13,
       fontFamily: 'Roboto-Regular',
       textAlign: 'center',
     },
     head1: {
-      flex: 2,
+      flex: 1.1,
       justifyContent: 'center',
       alignItems: 'center',
     },
     head2: {
-      flex: 2,
+      flex: 1.1,
       justifyContent: 'center',
       alignItems: 'center',
     },
     head3: {
-      flex: 1,
+      flex: 2.8,
       justifyContent: 'center',
       alignItems: 'center',
     },
     head4: {
-      flex: 2.5,
+      flex: 1.3,
       justifyContent: 'center',
       alignItems: 'center',
     },
     head5: {
-      flex: 0.8,
+      flex: 0.5,
       justifyContent: 'center',
       alignItems: 'center',
     },
@@ -84,95 +91,98 @@ const BHTNScreen = () => {
       paddingHorizontal: 4,
       paddingVertical: 4,
       borderColor: '#526377',
+      borderRightWidth: 0,
       borderWidth: 0.5,
+      borderTopWidth: 0,
     },
   });
   return (
     <View style={{backgroundColor: 'white', flex: 1}}>
-      <View style={styles.containerTop}>
-        <Text style={styles.textTn}>{t('record_of_unemployment')}</Text>
-        <Text
-          style={{
-            marginTop: 4,
-            fontFamily: 'Roboto-Regular',
-            fontSize: 14,
-            color: COLORS.n4,
-            paddingEnd: 10,
-          }}>
-          {t('accumulated_time')} {convertMonthToYearMonth(userInfo.tong_tham_gia_bhxh)}
-        </Text>
-        <Text
-          style={{
-            marginTop: 4,
-            fontFamily: 'Roboto-Regular',
-            fontSize: 14,
-            color: COLORS.secondary4,
-            paddingEnd: 10,
-          }}>
-          Tổng thời gian chậm đóng: 0 {t('month')}
-        </Text>
-      </View>
-      <View style={{flex: 1}}>
-        <View
-          style={{
-            flexDirection: 'row',
-            backgroundColor: '#3A679E',
-            marginHorizontal: 10,
-            borderColor: '#526377',
-            borderWidth: 0.5,
-             paddingVertical:8,
-            alignItems:'center'
-          }}>
-          <View style={styles.head1}>
-            <Text style={styles.textHead}>{t('from')}</Text>
-          </View>
-          <View style={styles.head2}>
-            <Text style={styles.textHead}>{t('to')}</Text>
-          </View>
-          <View style={styles.head3}>
-            <Text style={styles.textHead}>{t('employer')}</Text>
-          </View>
-          <View style={styles.head4}>
-            <Text style={styles.textHead}>{t('jobTitle')}</Text>
-          </View>
-          <View style={styles.head5}></View>
+      <ScrollView style={{flex: 1}}>
+        <View style={styles.containerTop}>
+          <Text style={styles.textTn}>{t('record_of_unemployment')}</Text>
+          <Text
+            style={{
+              marginTop: 4,
+              fontFamily: 'Roboto-Regular',
+              fontSize: 16,
+              color: COLORS.n4,
+              paddingEnd: 10,
+            }}>
+            {t('accumulated_time')}:{' '}
+            {convertMonthToYearMonth(userInfo.tong_tham_gia_bhxh)}
+          </Text>
+          <Text
+            style={{
+              marginTop: 4,
+              fontFamily: 'Roboto-Regular',
+              fontSize: 14,
+              color: "#e83232",
+              paddingEnd: 10,
+            }}>
+            Tổng thời gian chậm đóng: 0 {t('month')}
+          </Text>
         </View>
-
-        {userInfo.qt_bhtn?.map(item => (
+        <View style={{flex: 1}}>
           <View
             style={{
               flexDirection: 'row',
+              backgroundColor: '#3A679E',
               marginHorizontal: 10,
               borderColor: '#526377',
-              borderWidth: 1,
-              borderTopWidth:0,
+              borderWidth: 0.5,
+              paddingVertical: 8,
+              alignItems: 'center',
             }}>
-            <View style={[styles.head1, styles.cellContent]}>
-              <Text style={styles.textContent}>{item.tu_thang}</Text>
+            <View style={styles.head1}>
+              <Text style={styles.textHead}>{t('from')}</Text>
             </View>
-            <View style={[styles.head2, styles.cellContent]}>
-              <Text style={styles.textContent}>{item.den_thang}</Text>
+            <View style={styles.head2}>
+              <Text style={styles.textHead}>{t('to')}</Text>
             </View>
-            <View style={[styles.head3, styles.cellContent]}>
-              <Text style={styles.textContent}>{item.don_vi_cong_tac}</Text>
+            <View style={styles.head3}>
+              <Text style={styles.textHead}>{t('employer')}</Text>
             </View>
-            <View style={[styles.head4, styles.cellContent]}>
-              <Text style={styles.textContent}>{item.nghe_nghiep}</Text>
+            <View style={styles.head4}>
+              <Text style={styles.textHead}>{t('jobTitle_2')}</Text>
             </View>
-            <View style={[styles.head5, styles.cellContent]}>
+            <View style={styles.head5}></View>
+          </View>
+
+          {userInfo.qt_bhtn?.map(item => (
+            <View
+              key={item.tu_thang + item.den_thang}
+              style={{
+                flexDirection: 'row',
+                marginHorizontal: 10,
+                borderTopWidth: 0,
+              }}>
+              <View style={[styles.head1, styles.cellContent]}>
+                <Text style={styles.textContent}>{item.tu_thang}</Text>
+              </View>
+              <View style={[styles.head2, styles.cellContent]}>
+                <Text style={styles.textContent}>{item.den_thang}</Text>
+              </View>
+              <View style={[styles.head3, styles.cellContent]}>
+                <Text style={styles.textContent}>{item.don_vi_cong_tac}</Text>
+              </View>
+              <View style={[styles.head4, styles.cellContent]}>
+                <Text style={styles.textContent}>{item.nghe_nghiep}</Text>
+              </View>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('Detail-D', {data: item,index:1});
-                }}>
+                  navigation.navigate('Detail-D', {data: item, index: 1});
+                }}
+                style={[styles.head5, styles.cellContent]}>
                 <Image
                   style={{width: 20, height: 20, tintColor: '#3a679e'}}
                   source={images.eye_1}
                 />
               </TouchableOpacity>
             </View>
-          </View>
-        ))}
-      </View>
+          ))}
+        </View>
+      </ScrollView>
     </View>
   );
 };
